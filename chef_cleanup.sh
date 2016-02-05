@@ -29,4 +29,4 @@ do
   fi
 done
 
-cat ./unsortednodes.txt | sort > ./deadnodes.txt
+cat ./unsortednodes.txt | sort | uniq > ./deadnodes.txt
