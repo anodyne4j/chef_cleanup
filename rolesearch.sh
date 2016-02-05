@@ -10,8 +10,8 @@ knife role list > allroles.txt
 
 for role in `tr '\n' ' ' < allroles.txt`
 do 
-  HOSTS=`cat ./empty.txt`
-  EMPTY=`cat ./empty.txt`
+  HOSTS=`cat ./empty`
+  EMPTY=`cat ./empty`
   rm /tmp/rolesearchscratch.txt
   echo `knife search -i "roles:$role"` > /tmp/rolesearchscratch.txt
   HOSTS=`cat /tmp/rolesearchscratch.txt`
@@ -21,7 +21,7 @@ do
     echo $role >> ./roleswithhosts.txt
     for host in $HOSTS
     do
-      HOSTIP=`resolveip -s $host`
+      HOSTIP=`dig +short $host`
       if [ "$HOSTIP" = "$EMPTY" ]; then
         echo $host >> ./unsortednodes.txt
       fi
